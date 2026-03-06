@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Магний в продуктах питания</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FEF3E8;
+    --pale-orange: #F7C99A;
+    --soft-orange: #F0A96B;
+    --warm-orange: #E8894A;
+    --pistachio-light: #D4E8C2;
+    --pistachio: #A8CC8C;
+    --pistachio-deep: #7BAF60;
+    --pistachio-dark: #5A8A42;
+    --brown: #6B4A2A;
+    --text-dark: #3A2E20;
+    --text-mid: #5C4A30;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    font-family: 'Nunito', sans-serif;
+    color: var(--text-dark);
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+    position: relative;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .header::before {
+    content: '';
+    display: block;
+    width: 120px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--soft-orange), var(--pistachio));
+    margin: 0 auto 20px;
+    border-radius: 2px;
+  }
+
+  .header-label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--pistachio-dark);
+    margin-bottom: 10px;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 900;
+    color: var(--text-dark);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .header h1 span {
+    color: var(--warm-orange);
+  }
+
+  .header-sub {
+    font-size: 15px;
+    color: var(--text-mid);
+    font-weight: 400;
+    max-width: 480px;
+    margin: 0 auto 6px;
+    line-height: 1.6;
+  }
+
+  .mg-symbol {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--pistachio), var(--pistachio-deep));
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-top: 8px;
+    letter-spacing: 1px;
+  }
+
+  /* DAILY NORM BANNER */
+  .daily-norm {
+    background: linear-gradient(135deg, var(--soft-orange) 0%, var(--pale-orange) 60%, var(--pistachio-light) 100%);
+    border-radius: 20px;
+    padding: 24px 32px;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    box-shadow: 0 4px 20px rgba(232,137,74,0.18);
+  }
+
+  .norm-icon {
+    width: 64px;
+    height: 64px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  .norm-text { flex: 1; }
+
+  .norm-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+  }
+
+  .norm-detail {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.5;
+  }
+
+  .norm-values {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .norm-val {
+    text-align: center;
+    background: white;
+    border-radius: 12px;
+    padding: 10px 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .norm-val .amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--warm-orange);
+    display: block;
+  }
+
+  .norm-val .label {
+    font-size: 11px;
+    color: var(--text-mid);
+    font-weight: 600;
+  }
+
+  /* CATEGORIES */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--pale-orange), transparent);
+  }
+
+  /* FOOD CARDS GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1.5px solid transparent;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    border-radius: 4px 0 0 4px;
+  }
+
+  .card.orange::before { background: linear-gradient(180deg, var(--warm-orange), var(--pale-orange)); }
+  .card.pistachio::before { background: linear-gradient(180deg, var(--pistachio-deep), var(--pistachio-light)); }
+  .card.mixed::before { background: linear-gradient(180deg, var(--soft-orange), var(--pistachio)); }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+  }
+
+  .card-emoji {
+    font-size: 34px;
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cream);
+    border-radius: 12px;
+  }
+
+  .card-info { flex: 1; }
+
+  .card-name {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+  }
+
+  .card-sub {
+    font-size: 11px;
+    color: var(--text-mid);
+    margin-bottom: 8px;
+  }
+
+  .bar-wrap {
+    height: 7px;
+    background: var(--cream);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1s ease;
+  }
+
+  .bar-fill.orange { background: linear-gradient(90deg, var(--pale-orange), var(--warm-orange)); }
+  .bar-fill.pistachio { background: linear-gradient(90deg, var(--pistachio-light), var(--pistachio-deep)); }
+  .bar-fill.mixed { background: linear-gradient(90deg, var(--pale-orange), var(--pistachio)); }
+
+  .card-mg {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--text-dark);
+    flex-shrink: 0;
+    text-align: right;
+    min-width: 48px;
+  }
+
+  .card-mg small {
+    display: block;
+    font-family: 'Nunito', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-mid);
+  }
+
+  /* TOP CHART */
+  .chart-section {
+    background: white;
+    border-radius: 24px;
+    padding: 28px 28px 24px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  }
+
+  .chart-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+  }
+
+  .chart-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .chart-rank {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--pistachio-dark);
+    width: 22px;
+    flex-shrink: 0;
+  }
+
+  .chart-emoji { font-size: 20px; flex-shrink: 0; width: 28px; text-align: center; }
+
+  .chart-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dark);
+    width: 130px;
+    flex-shrink: 0;
+  }
+
+  .chart-bar-wrap {
+    flex: 1;
+    height: 12px;
+    background: var(--cream);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .chart-bar {
+    height: 100%;
+    border-radius: 6px;
+  }
+
+  .chart-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-dark);
+    width: 60px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* SYMPTOMS */
+  .symptoms {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .symptom-box {
+    border-radius: 18px;
+    padding: 22px;
+  }
+
+  .symptom-box.deficiency {
+    background: linear-gradient(135deg, #FDF0E4, #F7D8B8);
+    border: 1.5px solid var(--pale-orange);
+  }
+
+  .symptom-box.benefits {
+    background: linear-gradient(135deg, #EBF5E0, #D4E8C2);
+    border: 1.5px solid var(--pistachio);
+  }
+
+  .symptom-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .symptom-box.deficiency h3 { color: var(--warm-orange); }
+  .symptom-box.benefits h3 { color: var(--pistachio-dark); }
+
+  .symptom-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 9px;
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.5;
+  }
+
+  .symptom-item .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .deficiency .dot { background: var(--warm-orange); }
+  .benefits .dot { background: var(--pistachio-deep); }
+
+  /* TIPS */
+  .tips {
+    background: linear-gradient(135deg, var(--pistachio-light) 0%, var(--pale-orange) 100%);
+    border-radius: 20px;
+    padding: 24px 28px;
+    margin-bottom: 32px;
+  }
+
+  .tips h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 12px;
+  }
+
+  .tip {
+    background: rgba(255,255,255,0.75);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 12.5px;
+    color: var(--text-mid);
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .tip-icon { font-size: 18px; flex-shrink: 0; }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: #A08060;
+    border-top: 1px solid var(--pale-orange);
+    padding-top: 20px;
+  }
+
+  /* DECORATIVE BLOBS */
+  .blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .blob-1 {
+    width: 400px; height: 400px;
+    background: var(--soft-orange);
+    top: -100px; right: -100px;
+  }
+
+  .blob-2 {
+    width: 300px; height: 300px;
+    background: var(--pistachio);
+    bottom: 200px; left: -80px;
+  }
+
+  .page > * { position: relative; z-index: 1; }
+
+  @media (max-width: 580px) {
+    .symptoms { grid-template-columns: 1fr; }
+    .norm-values { justify-content: center; }
+    .daily-norm { flex-direction: column; text-align: center; }
+    .chart-label { width: 90px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-label">Нутрициология · Справочник</div>
+    <h1>Магний<br><span>в продуктах</span></h1>
+    <p class="header-sub">Содержание Mg на 100 г продукта и его роль в организме человека</p>
+    <span class="mg-symbol">Mg · Элемент №12</span>
+  </div>
+
+  <!-- DAILY NORM -->
+  <div class="daily-norm">
+    <div class="norm-icon">🧬</div>
+    <div class="norm-text">
+      <div class="norm-title">Суточная потребность в магнии</div>
+      <div class="norm-detail">Участвует в 300+ биохимических реакциях. Необходим для мышц, нервов и костей.</div>
+    </div>
+    <div class="norm-values">
+      <div class="norm-val">
+        <span class="amount">400</span>
+        <span class="label">мг / мужчины</span>
+      </div>
+      <div class="norm-val">
+        <span class="amount">310</span>
+        <span class="label">мг / женщины</span>
+      </div>
+      <div class="norm-val">
+        <span class="amount">360</span>
+        <span class="label">мг / беременные</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP CHART -->
+  <div class="chart-section">
+    <div class="chart-title">🏆 Топ-10 источников магния (мг / 100 г)</div>
+
+    <div class="chart-row">
+      <div class="chart-rank">1</div>
+      <div class="chart-emoji">🌿</div>
+      <div class="chart-label">Пшеничные отруби</div>
+      <div class="chart-bar-wrap"><div class="chart-bar" style="width:100%; background: linear-gradient(90deg, #F7C99A, #E8894A);"></div></div>
+      <div class="chart-val">611 мг</div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-rank">2</div>
+      <div class="chart-emoji">🎍</div>
+      <div class="chart-label">Семена тыквы</div>
+      <div class="chart-bar-wrap"><div class="chart-bar" style="width:92%; background: linear-gradient(90deg, #D4E8C2, #7BAF60);"></div></div>
+      <div class="chart-val">560 мг</div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-rank">3</div>
+      <div class="chart-emoji">🌰</div>
+      <div class="chart-label">Какао-порошок</div>
+      <div class="chart-bar-wrap"><div class="chart-bar" style="width:86%; background: linear-gradient(90deg, #F0A96B, #A8CC8C);"></div></div>
+      <div class="chart-val">524 мг</div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-rank">4</div>
+      <div class="chart-emoji">🌱</div>
+      <div class="chart-label">Семена льна</div>
+      <div class="chart-bar-wrap"><div class="chart-bar" style="width:74%; background: linear-gradient(90deg, #F7C99A, #E8894A);"></div></div>
+      <div class="chart-val">392 мг</div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-rank">5</div>
+      <div class="chart-emoji">🥜</div>
+      <div class="chart-label">Кунжут</div>
+      <div class="chart-bar-wrap"><div class="chart-bar" style="width:70%; background: linear-gradient(90deg, #D4E8C2, #7BAF60);"></div></div>
+      <div class="chart-val">351 мг</div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-rank">6</div>
+      <div class="chart-emoji">🥜</div>
+      <div class="chart-label">Миндаль</div>
+      <div class="chart-bar-wrap"><div class="chart-bar" style="width:57%; background: linear-gradient(90deg, #F7C99A, #A8CC8C);"></div></div>
+      <div class="chart-val">268 мг</div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-rank">7</div>
+      <div class="chart-emoji">🥬</div>
+      <div class="chart-label">Гречка (сухая)</div>
+      <div class="chart-bar-wrap"><div class="chart-bar" style="width:53%; background: linear-gradient(90deg, #D4E8C2, #7BAF60);"></div></div>
+      <div class="chart-val">258 мг</div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-rank">8</div>
+      <div class="chart-emoji">🌻</div>
+      <div class="chart-label">Подсолнечник</div>
+      <div class="chart-bar-wrap"><div class="chart-bar" style="width:48%; background: linear-gradient(90deg, #F0A96B, #A8CC8C);"></div></div>
+      <div class="chart-val">317 мг</div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-rank">9</div>
+      <div class="chart-emoji">🫘</div>
+      <div class="chart-label">Нут</div>
+      <div class="chart-bar-wrap"><div class="chart-bar" style="width:35%; background: linear-gradient(90deg, #F7C99A, #E8894A);"></div></div>
+      <div class="chart-val">115 мг</div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-rank">10</div>
+      <div class="chart-emoji">🐟</div>
+      <div class="chart-label">Скумбрия</div>
+      <div class="chart-bar-wrap"><div class="chart-bar" style="width:29%; background: linear-gradient(90deg, #D4E8C2, #7BAF60);"></div></div>
+      <div class="chart-val">97 мг</div>
+    </div>
+  </div>
+
+  <!-- CARDS GRID -->
+  <div class="section-title">🌾 Зерновые и бобовые</div>
+  <div class="grid" style="margin-bottom:32px">
+    <div class="card orange">
+      <div class="card-emoji">🌾</div>
+      <div class="card-info">
+        <div class="card-name">Овсяная крупа</div>
+        <div class="card-sub">сырая</div>
+        <div class="bar-wrap"><div class="bar-fill orange" style="width:24%"></div></div>
+      </div>
+      <div class="card-mg">135<small>мг</small></div>
+    </div>
+    <div class="card pistachio">
+      <div class="card-emoji">🍚</div>
+      <div class="card-info">
+        <div class="card-name">Коричневый рис</div>
+        <div class="card-sub">сырой</div>
+        <div class="bar-wrap"><div class="bar-fill pistachio" style="width:18%"></div></div>
+      </div>
+      <div class="card-mg">110<small>мг</small></div>
+    </div>
+    <div class="card mixed">
+      <div class="card-emoji">🫘</div>
+      <div class="card-info">
+        <div class="card-name">Чечевица</div>
+        <div class="card-sub">сухая</div>
+        <div class="bar-wrap"><div class="bar-fill mixed" style="width:18%"></div></div>
+      </div>
+      <div class="card-mg">107<small>мг</small></div>
+    </div>
+    <div class="card orange">
+      <div class="card-emoji">🫘</div>
+      <div class="card-info">
+        <div class="card-name">Фасоль</div>
+        <div class="card-sub">сухая</div>
+        <div class="bar-wrap"><div class="bar-fill orange" style="width:20%"></div></div>
+      </div>
+      <div class="card-mg">140<small>мг</small></div>
+    </div>
+  </div>
+
+  <div class="section-title">🥦 Овощи и фрукты</div>
+  <div class="grid" style="margin-bottom:32px">
+    <div class="card pistachio">
+      <div class="card-emoji">🥬</div>
+      <div class="card-info">
+        <div class="card-name">Шпинат</div>
+        <div class="card-sub">свежий</div>
+        <div class="bar-wrap"><div class="bar-fill pistachio" style="width:13%"></div></div>
+      </div>
+      <div class="card-mg">79<small>мг</small></div>
+    </div>
+    <div class="card orange">
+      <div class="card-emoji">🥑</div>
+      <div class="card-info">
+        <div class="card-name">Авокадо</div>
+        <div class="card-sub">свежий</div>
+        <div class="bar-wrap"><div class="bar-fill orange" style="width:9%"></div></div>
+      </div>
+      <div class="card-mg">29<small>мг</small></div>
+    </div>
+    <div class="card mixed">
+      <div class="card-emoji">🍌</div>
+      <div class="card-info">
+        <div class="card-name">Банан</div>
+        <div class="card-sub">свежий</div>
+        <div class="bar-wrap"><div class="bar-fill mixed" style="width:6%"></div></div>
+      </div>
+      <div class="card-mg">27<small>мг</small></div>
+    </div>
+    <div class="card pistachio">
+      <div class="card-emoji">🌿</div>
+      <div class="card-info">
+        <div class="card-name">Брокколи</div>
+        <div class="card-sub">свежая</div>
+        <div class="bar-wrap"><div class="bar-fill pistachio" style="width:5%"></div></div>
+      </div>
+      <div class="card-mg">21<small>мг</small></div>
+    </div>
+  </div>
+
+  <div class="section-title">🐄 Животные продукты</div>
+  <div class="grid" style="margin-bottom:40px">
+    <div class="card orange">
+      <div class="card-emoji">🐟</div>
+      <div class="card-info">
+        <div class="card-name">Лосось</div>
+        <div class="card-sub">запечённый</div>
+        <div class="bar-wrap"><div class="bar-fill orange" style="width:12%"></div></div>
+      </div>
+      <div class="card-mg">30<small>мг</small></div>
+    </div>
+    <div class="card pistachio">
+      <div class="card-emoji">🥚</div>
+      <div class="card-info">
+        <div class="card-name">Яйцо куриное</div>
+        <div class="card-sub">варёное</div>
+        <div class="bar-wrap"><div class="bar-fill pistachio" style="width:4%"></div></div>
+      </div>
+      <div class="card-mg">12<small>мг</small></div>
+    </div>
+    <div class="card mixed">
+      <div class="card-emoji">🧀</div>
+      <div class="card-info">
+        <div class="card-name">Твёрдый сыр</div>
+        <div class="card-sub">средний</div>
+        <div class="bar-wrap"><div class="bar-fill mixed" style="width:7%"></div></div>
+      </div>
+      <div class="card-mg">28<small>мг</small></div>
+    </div>
+    <div class="card orange">
+      <div class="card-emoji">🍗</div>
+      <div class="card-info">
+        <div class="card-name">Курица</div>
+        <div class="card-sub">грудка, запечённая</div>
+        <div class="bar-wrap"><div class="bar-fill orange" style="width:5%"></div></div>
+      </div>
+      <div class="card-mg">29<small>мг</small></div>
+    </div>
+  </div>
+
+  <!-- SYMPTOMS -->
+  <div class="section-title">💡 Роль магния в организме</div>
+  <div class="symptoms">
+    <div class="symptom-box deficiency">
+      <h3>⚠️ Дефицит магния</h3>
+      <div class="symptom-item"><div class="dot"></div><span>Мышечные судороги и спазмы</span></div>
+      <div class="symptom-item"><div class="dot"></div><span>Хроническая усталость и слабость</span></div>
+      <div class="symptom-item"><div class="dot"></div><span>Нарушения сна и тревожность</span></div>
+      <div class="symptom-item"><div class="dot"></div><span>Головные боли и мигрень</span></div>
+      <div class="symptom-item"><div class="dot"></div><span>Нарушение сердечного ритма</span></div>
+      <div class="symptom-item"><div class="dot"></div><span>Снижение концентрации</span></div>
+    </div>
+    <div class="symptom-box benefits">
+      <h3>✅ Польза магния</h3>
+      <div class="symptom-item"><div class="dot"></div><span>Укрепление костей и зубов</span></div>
+      <div class="symptom-item"><div class="dot"></div><span>Нормализация давления и ритма сердца</span></div>
+      <div class="symptom-item"><div class="dot"></div><span>Снижение стресса, улучшение сна</span></div>
+      <div class="symptom-item"><div class="dot"></div><span>Регуляция уровня сахара в крови</span></div>
+      <div class="symptom-item"><div class="dot"></div><span>Поддержка иммунной системы</span></div>
+      <div class="symptom-item"><div class="dot"></div><span>Синтез белка и ДНК</span></div>
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <div class="tips">
+    <h3>🌿 Как повысить усвоение магния</h3>
+    <div class="tips-grid">
+      <div class="tip">
+        <span class="tip-icon">🍋</span>
+        <span>Витамин С улучшает усвоение. Добавляйте лимонный сок к блюдам</span>
+      </div>
+      <div class="tip">
+        <span class="tip-icon">🚫</span>
+        <span>Алкоголь и кофеин снижают уровень Mg. Ограничьте их употребление</span>
+      </div>
+      <div class="tip">
+        <span class="tip-icon">💧</span>
+        <span>Замачивайте орехи и бобовые — это снижает содержание фитатов</span>
+      </div>
+      <div class="tip">
+        <span class="tip-icon">🌡️</span>
+        <span>Готовьте на пару или запекайте — так сохраняется больше Mg</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Данные усреднены · мг на 100 г сырого продукта · Источник: ВОЗ, USDA, Роспотребнадзор
+  </div>
+
+</div>
+</body>
+</html>
